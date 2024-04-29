@@ -1,6 +1,7 @@
 package uk.co.michaelshields.assignment_1;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -930,14 +931,15 @@ public class App {
 			// prompt the user for the custom date
 			if (choice == "Custom Date") {
 				PrintUtil.promptBanner(
-						"Please input a valid date in the format: YYYY-DD-MM");
+						"Please input a valid date in the format: dd-MM-yyyy");
 
 				// Capture the users input
 				String dateStr = inputScanner.nextLine();
 
 				try {
 					// Attempt to parse the date
-					expiryDate = LocalDate.parse(dateStr);
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+					expiryDate = LocalDate.parse(dateStr, formatter);
 				} catch (Exception e) {
 					// Display the parse failure error to the user and go back a
 					// step
@@ -999,7 +1001,7 @@ public class App {
 
 		// Display the a objects details to the user
 		PrintUtil.infoBanner(className.toUpperCase() + " DETAILS");
-		((Loan) object).displayDetails();
+		((Displayable) object).displayDetails();
 
 		// Request confirmation from the user
 		String confirmMenuPrompt = "Is this the correct " + className + "?";
