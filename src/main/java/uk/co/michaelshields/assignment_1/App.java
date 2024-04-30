@@ -251,11 +251,12 @@ public class App {
 			dateSearchMethodMenuChoices);
 
 	/**
-	 * A routine that uses the addMember method of the Library class. The user
+	 * A method that uses the addMember method of the Library class. The user
 	 * is prompted for the member's details and adds the member to the library's
 	 * members collection.
 	 */
 	private static void addMember() {
+		// Print the menu header
 		PrintUtil.menuHeader("ADD A MEMBER");
 
 		// Member Data Prompter Setup
@@ -268,7 +269,7 @@ public class App {
 		// Create a prompter instance, passing in the array of prompts
 		Prompter memberDataPrompter = new Prompter(memberDataPrompts);
 
-		// Initiate the process of issuing prompts and collecting the
+		// Initiate the process of displaying prompts and collecting the
 		// the user's input
 		memberDataPrompter.issuePrompts();
 
@@ -286,6 +287,7 @@ public class App {
 			// provided by the user
 			Member newMember = new Member(firstName, lastName, email,
 					phoneNumber);
+			
 			library.addMember(newMember);
 
 			// Display confirmation to the user that the member has been added
@@ -309,7 +311,7 @@ public class App {
 	}
 
 	/**
-	 * A routine that requests the ID Number of the member to be removed and
+	 * A method that requests the ID Number of the member to be removed and
 	 * removes them if they are found
 	 */
 	private static void removeMember() {
@@ -991,12 +993,14 @@ public class App {
 	 * @see <a href="Displayable.html>Displayable Interface</a>
 	 * @param object
 	 *            - The object that is to be confirmed
-	 * @param objectType
-	 *            - A string
-	 * @return
+	 * @param objectType - A string
+	 * @return isConfirmed - Indicates that the correct object has 
+	 *                       been confirmed by the user
 	 */
 	private static <T> boolean isConfirmed(T object) {
 		// Determine the objects class name
+		// so that it can be dynamically inserted into 
+		// the confirmation prompt
 		String className = object.getClass().getSimpleName();
 
 		// Display the a objects details to the user
@@ -1006,23 +1010,31 @@ public class App {
 		// Request confirmation from the user
 		String confirmMenuPrompt = "Is this the correct " + className + "?";
 		Map<String, Consumer<Void>> confirmMenuChoices = new LinkedHashMap<>();
+		
+		// Empty lambdas as no actions are required 
+		// when a choice is made
 		confirmMenuChoices.put("Yes", (Void) -> {
 		});
 		confirmMenuChoices.put("No", (Void) -> {
 		});
+		
 		Menu confirmMenu = new Menu("", confirmMenuPrompt, confirmMenuChoices);
+		
 		confirmMenu.run();
+		
+		// Get the user's choice
 		String choice = confirmMenu.getChosenKey();
 
-		// Return boolean based on users choice
+		// Return true if the use has confirmed the choice
 		if (choice == "Yes") {
 			return true;
 		}
+		
 		return false;
 	}
 
 	/**
-	 * A routine that is run if the user confirms they want to quit the program
+	 * A method that quits the program
 	 */
 	private static void quit() {
 		PrintUtil.infoBanner("Thank you and Goodbye");
@@ -1033,8 +1045,7 @@ public class App {
 	/**
 	 * The main method of the application
 	 * 
-	 * @param args
-	 *            unused
+	 * @param args - Not used
 	 */
 	public static void main(String[] args) {
 		// Display a welcome message to the user

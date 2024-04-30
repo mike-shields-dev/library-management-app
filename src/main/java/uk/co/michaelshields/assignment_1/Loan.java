@@ -18,21 +18,20 @@ public class Loan implements Displayable {
 	private Map<String, Object> details = new LinkedHashMap<>();
 
 	/**
-	 * Constructor
+	 * Constructor:
+	 * Instantiates Loan objects 
+	 * @param member - The member (borrower)
 	 *
-	 * @param member
-	 *            The member (borrower)
-	 * @param book
-	 *            The book that being borrowed
-	 * @param issueDate
-	 *            The loan's date of issue
-	 * @param expiryDate
-	 *            The loan's date of expiration
-	 * @throws IllegalArgumentException
-	 *             if any of the provided parameters are invalid
+	 * @param book - The book that is being borrowed (Book)
+	 * 
+	 * @param issueDate - The loan's date of issue (LocalDate)
+	 * 
+	 * @param expiryDate - The loan's date of expiration (LocalDate)
+	 * 
+	 * @throws IllegalArgumentException - If any of the provided parameters are invalid
 	 */
 	public Loan(Member member, Book book, LocalDate issueDate,
-			LocalDate expiryDate) {
+			LocalDate expiryDate) throws IllegalArgumentException {
 		setMember(member);
 		setBook(book);
 		setIssueDate(issueDate);
@@ -40,45 +39,52 @@ public class Loan implements Displayable {
 	}
 
 	/**
+	 * Mutator Method:
 	 * Sets the member who is borrowing the book
 	 *
-	 * @param member
-	 *            The member who is borrowing the book
-	 * @throws IllegalArgumentException
-	 *             if the member's ID number has not been set indicated by a
-	 *             default ID Number of zero.
+	 * @param member - The member who is borrowing the book (Member)
+	 * 
+	 * @throws IllegalArgumentException - If the member's ID number has not 
+	 *                                    been set indicated by a
+	 *                                    default ID Number of zero.
 	 */
-	private void setMember(Member member) {
+	private void setMember(Member member) throws IllegalArgumentException {
+		// Guard clause preventing null members
 		if (member == null) {
 			throw new IllegalArgumentException(
 					"Cannot create loan, member is null");
 		}
+		// Guard clause preventing members with no set ID number
 		if (member.getIDNumber() == 0) {
 			throw new IllegalArgumentException(
 					"Cannot create loan, the member has not been issued with an ID number");
 		}
 
+		// Add the member to the loan
 		details.put("Member", member);
 	}
 
 	/**
+	 * Accessor Method:
 	 * Returns the borrower of the book
 	 *
-	 * @return The member that borrowed the book
+	 * @return member - The member that borrowed the book (Member)
 	 */
 	public Member getMember() {
 		return (Member) details.get("Member");
 	}
 
 	/**
-	 *
-	 * @param book
-	 *            The book that is being borrowed
-	 * @throws IllegalArgumentException
-	 *             if the book's ID number has not been set indicated by a
-	 *             default ID Number of zero.
+	 * Mutator Method:
+	 * Set's the loan's book
+	 * 
+	 * @param book - The book that is being borrowed (Book)
+	 * 
+	 * @throws IllegalArgumentException - If the book's ID number has not 
+	 *                                    been set indicated by a
+	 *                                    default ID Number of zero.
 	 */
-	private void setBook(Book book) {
+	private void setBook(Book book) throws IllegalArgumentException {
 		if (book == null) {
 			throw new IllegalArgumentException(
 					"Cannot create loan, book is null");
@@ -88,38 +94,45 @@ public class Loan implements Displayable {
 					"Cannot create loan, the book has not been issued with an ID number");
 		}
 
+		// Set the loan's book
 		details.put("Book", book);
 	}
 
 	/**
+	 * Accessor Method:
 	 * Returns the book that was loaned
 	 *
-	 * @return The book that was loaned
+	 * @return book - The book that was loaned (Book)
 	 */
 	public Book getBook() {
 		return (Book) details.get("Book");
 	}
 
 	/**
+	 * Mutator Method:
 	 * Sets the loan's date of issue. The method is intentionally private, so
 	 * that once a loan has been created its issue date is read only.
 	 * 
-	 * @param issueDate
-	 *            The loan's date of issue
+	 * @param issueDate - The loan's date of issue (LocalDate)
+	 * 
+	 * @throws IllegalArgumentException - If the issue date is null
 	 */
 	private void setIssueDate(LocalDate issueDate) {
+		// Guard clause preventing null issueDate
 		if (issueDate == null) {
 			throw new IllegalArgumentException(
 					"Cannot create loan, cannot set issue date to null");
 		}
 
+		// Set the loan's issue date
 		details.put("Issue Date", issueDate);
 	}
 
 	/**
+	 * Accessor Method:
 	 * Returns the loan's date of issue
 	 *
-	 * @return The loan's date of issue
+	 * @return issueDate - The loan's date of issue (LocalDate)
 	 */
 	public LocalDate getIssueDate() {
 		return (LocalDate) details.get("Issue Date");
@@ -129,29 +142,33 @@ public class Loan implements Displayable {
 	 * Sets the loan's expiration date. The method is intentionally private, so
 	 * that once a loan has been created its expiration date is read only.
 	 * 
-	 * @param expiryDate
-	 *            The expiration date
+	 * @throws IllegalArgumentException - If the expiration date is null
 	 */
 	private void setExpiryDate(LocalDate expiryDate) {
+		// Guard clause preventing null expiryDate
 		if (expiryDate == null) {
 			throw new IllegalArgumentException(
 					"Cannot create loan, cannot set expiry date to null");
 		}
 
+		// Compare the dates to make sure that the issueDate is before the expiryDate
 		int comparedDates = getIssueDate().compareTo(expiryDate);
 
+		// Throw an error if the issueDate is after the expiryDate
 		if (comparedDates >= 0) {
 			throw new IllegalArgumentException(
 					"Cannot create loan, the issue date cannot be on or after the expiry date");
 		}
 
+		// Set the loans expiration date
 		details.put("Expiry Date", expiryDate);
 	}
 
 	/**
+	 * Accessor Method:
 	 * Returns the loan's expiration date
 	 * 
-	 * @return The loan's expiration date
+	 * @return expiryDate - The loan's expiration date (LocalDate)
 	 */
 	public LocalDate getExpiryDate() {
 		return (LocalDate) details.get("Expiry Date");
@@ -162,11 +179,17 @@ public class Loan implements Displayable {
 	 */
 	@Override
 	public void displayDetails() {
+		// Get the loans member
 		Member member = (Member) details.get("Member");
+		// Get the loans book
 		Book book = (Book) details.get("Book");
+		
+		// Create a DateTimeFormatter and configure it 
+		// to display dates in the required format
 		DateTimeFormatter formatter = DateTimeFormatter
 				.ofPattern("d MMMM uuuu");
 
+		// Display the loans details
 		System.out.println("Member:");
 		member.displayDetails();
 		System.out.println();

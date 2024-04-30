@@ -6,10 +6,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>uk.co.michaelshields</groupId>
-	<artifactId>assignment-1</artifactId>
+	<artifactId>library-management-system</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>assignment-1</name>
+	<name>library-management-system</name>
 	<!-- FIXME change it to the project's website -->
 	<url>http://www.example.com</url>
 

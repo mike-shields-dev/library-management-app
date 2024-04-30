@@ -1,9 +1,9 @@
 package uk.co.michaelshields.assignment_1;
 
 /**
- * The Displayable interface represents an object that can display its details.
+ * An interface that represents an object that can display its details.
  * Implementing classes should provide an implementation for the
- * {@code displayDetails} method.
+ * displayDetails method.
  * 
  * @author M. Shields
  * @version 1.0

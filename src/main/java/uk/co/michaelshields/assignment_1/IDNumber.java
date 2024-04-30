@@ -1,9 +1,9 @@
 package uk.co.michaelshields.assignment_1;
 
 /**
- * The IDNumber interface represents an object that has an ID Number that can be
- * updated or retrieved. Implementing classes should provide an implementation
- * for the {@code getIDNumber} and {@code setIDNumber(int idNumber)} methods
+ * An interface that represents an object that has an ID Number that can be
+ * accessed or mutated. Implementing classes should provide an implementation
+ * for the getIDNumber and setIDNumber(int idNumber) methods
  * 
  * @author M. Shields
  * @version 1.0

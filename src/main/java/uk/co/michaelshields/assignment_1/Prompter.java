@@ -5,7 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * A Prompter, it prompts the user for information and scans and collects their input allowing the information to be accessed
+ * A Prompter, it prompts the user for information and reads and 
+ * collates their input allowing the input information to be accessed
+ * 
+ * @author Michael Shields
+ * 
+ * @version 1.0
  */
 public class Prompter {
 	private Scanner inputScanner = new Scanner(System.in);
@@ -15,17 +20,20 @@ public class Prompter {
 	private List<String> responses = new ArrayList<>();
 
 	/**
-	 * Constructor
+	 * Constructor:
+	 * Instantiates prompter objects
 	 * 
-	 * @param prompts
-	 *            The list of prompts that will be issued to the user
-	 * @throws IllegalArgumentException if the prompts list is null or empty
+	 * @param prompts - The list of prompts that will be issued to the user (String[])
+	 * 
+	 * @throws IllegalArgumentException - If the prompts list is null or empty
 	 */
 	public Prompter(String[] prompts) {
+		// Guard clause that prevents null prompts list
 		if(prompts == null) {
 			throw new IllegalArgumentException("Cannot create prompter with null prompts");
 		}
 		
+		// Guard clause that prevents instantiation of prompter with no prompts
 		if(prompts.length == 0) {
 			throw new IllegalArgumentException("Cannot create prompter without prompts");
 		}
@@ -34,8 +42,8 @@ public class Prompter {
 	}
 
 	/**
-	 * Iterates through the prompts, prompting a response from the user and
-	 * adding their response to the responses collection
+	 * Iterates through the prompts, prompting a response from the user for each one 
+	 * and adds their response to the responses collection
 	 */
 	public void issuePrompts() {
 		for (String prompt : prompts) {
@@ -48,9 +56,10 @@ public class Prompter {
 	}
 
 	/**
+	 * Accessor Method:
 	 * Returns the user's responses
 	 * 
-	 * @return The list of responses that the user provided
+	 * @return prompts - The list of responses that the user provided (List<String>)
 	 */
 	public List<String> getResponses() {
 		return responses;

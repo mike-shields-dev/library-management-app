@@ -6,15 +6,17 @@ import java.util.Map;
  * A class that implements a suite of printing utility functions for displaying
  * information is various formats and colours.
  * 
+ * All the methods are static and therefore this class should not be instantiated using 
+ * the constructor
+ * 
  * @author M. Shields
  * @version 1.0
  */
 
 public class PrintUtil {
 	/**
-	 * A map of colours where the key is the colour name and the value is the
-	 * corresponding ANSI escape code for setting the print colour used in the
-	 * terminal
+	 * 
+	 * The ANSI codes used to set the output colour printed in the command line
 	 * 
 	 * @see <a href=
 	 *      "https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#8-colors">here</a>
@@ -31,16 +33,17 @@ public class PrintUtil {
 	 * A utility method to print menu headers in a standard format and
 	 * consistent colour
 	 * 
-	 * @param text
-	 *            The text to be displayed in the menu header
+	 * @param text - The text to be displayed in the menu header (String)
 	 */
 	public static void menuHeader(String text) {
+		// Set the output colour
 		System.out.print(CYAN);
 		System.out.println(
 				"====================================================================");
 		System.out.println(text);
 		System.out.println(
 				"====================================================================");
+		// Reset the output colour
 		System.out.print(RESET);
 	}
 
@@ -48,16 +51,17 @@ public class PrintUtil {
 	 * A utility method to print error banners in a standard format and
 	 * consistent colour
 	 * 
-	 * @param text
-	 *            The text to be displayed in the error banner
+	 * @param text - The text to be displayed in the error banner (String)
 	 */
 	public static void errorBanner(String text) {
+		// Set the output colour
 		System.out.print(RED);
 		System.out.println(
 				"--------------------------------------------------------------------");
 		System.out.println(text);
 		System.out.println(
 				"--------------------------------------------------------------------");
+		// Reset the output 
 		System.out.print(RESET);
 	}
 
@@ -65,16 +69,17 @@ public class PrintUtil {
 	 * A utility method to print info banners in a standard format and
 	 * consistent colour
 	 * 
-	 * @param text
-	 *            The text to be displayed in the info banner
+	 * @param text - The text to be displayed in the info banner
 	 */
 	public static void infoBanner(String text) {
+		// Set the output colour
 		System.out.print(PURPLE);
 		System.out.println(
 				"--------------------------------------------------------------------");
 		System.out.println(text);
 		System.out.println(
 				"--------------------------------------------------------------------");
+		// Reset the output 
 		System.out.print(RESET);
 	}
 
@@ -86,12 +91,14 @@ public class PrintUtil {
 	 *            The text to be displayed in the success banner
 	 */
 	public static void successBanner(String text) {
+		// Set the output colour
 		System.out.print(GREEN);
 		System.out.println(
 				"--------------------------------------------------------------------");
 		System.out.println(text);
 		System.out.println(
 				"--------------------------------------------------------------------");
+		// Reset the output 
 		System.out.print(RESET);
 	}
 
@@ -103,12 +110,14 @@ public class PrintUtil {
 	 *            The text to be displayed in the prompt banner
 	 */
 	public static void promptBanner(String text) {
+		// Set the output colour
 		System.out.print(YELLOW);
 		System.out.println(
 				"--------------------------------------------------------------------");
 		System.out.println(text);
 		System.out.println(
 				"--------------------------------------------------------------------");
+		// Reset the output 
 		System.out.print(RESET);
 	}
 
@@ -116,12 +125,13 @@ public class PrintUtil {
 	 * A utility method to print prompt lines in a standard format and
 	 * consistent colour
 	 * 
-	 * @param text
-	 *            The text to be displayed in the prompt line
+	 * @param text - The text to be displayed in the prompt line (String)
 	 */
 	public static void promptLine(String text) {
+		// Set the output colour
 		System.out.print(YELLOW);
 		System.out.println(text);
+		// Reset the output 
 		System.out.print(RESET);
 	}
 
@@ -130,8 +140,8 @@ public class PrintUtil {
 	 * Displayable interface i.e. Members, Books and Loans
 	 * 
 	 * @see <a href="Displayable.html">Displayable</a>
-	 * @param details
-	 *            The object's details
+	 * 
+	 * @param details - The object's details (Map<String, Object>)
 	 */
 	public static void printDetails(Map<String, Object> details) {
 		int columnWidth = 15;
@@ -146,10 +156,9 @@ public class PrintUtil {
 
 	/**
 	 * A printing utility to display an array of strings as a numbered list
-	 * starting from 1
+	 * starting at item 1
 	 * 
-	 * @param choices
-	 *            The array of strings
+	 * @param choices - The array of strings (String[])
 	 */
 	public static void menu(String[] choices) {
 		System.out.println(

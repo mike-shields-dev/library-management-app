@@ -11,10 +11,10 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Models a library system with functionality to manage collections of Books,
- * Members and Loans.
+ * A class that models a library management system with 
+ * functionality to manage collections of Books, Members and Loans.
  * 
- * @see < href="Book.html">Book</a>
+ * @see <a href="Book.html">Book</a>
  * @see <a href="Member.html">Member</a>
  * @see <a href="Loan.html">Loan</a>
  * 
@@ -40,9 +40,11 @@ public class Library {
 	private int loanDurationInDays;
 
 	/**
-	 * Constructor
+	 * Constructor: 
+	 * Instantiates Library objects
+	 * Set's the ID Number counter to zero.
+	 * Set's the default duration for loans to twenty one days.
 	 * 
-	 * @param - No parameters
 	 */
 	public Library() {
 		// Assign an empty ArrayList to contain instances of the Book class
@@ -60,6 +62,7 @@ public class Library {
 	}
 
 	/**
+	 * Mutator Method:
 	 * Adds a member to the library's members collection<br>
 	 * It also sets the member's ID number using the library's getNextIDNumber method<br>
 	 * 
@@ -67,7 +70,7 @@ public class Library {
 	 * 
 	 * @param member - A member (Member)
 	 * 
-	 * @throws IllegalArgumentException - If null is provided or the provided member's 
+	 * @throws IllegalArgumentException - If provided member is null or their 
 	 *                                    email matches an existing member's email
 	 */
 	public void addMember(Member member) throws IllegalArgumentException {
@@ -90,7 +93,8 @@ public class Library {
 	}
 
 	/**
-	 * Getter Method: Returns the members collection
+	 * Accessor Method: 
+	 * Returns the members collection
 	 * 
 	 * @return members - The library's members (ArrayList<Member>)
 	 */
@@ -99,7 +103,8 @@ public class Library {
 	}
 
 	/**
-	 * Getter Method: Returns the member with the provided ID number
+	 * Accessor Method: 
+	 * Returns the member with the provided ID number
 	 * 
 	 * @param idNumber - The ID number of the member (integer)
 	 * 
@@ -109,6 +114,8 @@ public class Library {
 	 * 
 	 * @throws NoSuchElementException - If the member is not found or the
 	 *                                  members collection is empty
+	 *                                  
+	 * @see #isValidIDNumber(int)
 	 */
 	public Member getMemberByID(int idNumber) throws IllegalArgumentException, NoSuchElementException {
 		// Guard clause that prevents invalid ID numbers from being provided
@@ -131,6 +138,7 @@ public class Library {
 			}
 		}
 
+		// Throw an error if not member was found
 		throw new NoSuchElementException(
 				"No member with that ID number was found!");
 	}
@@ -139,7 +147,8 @@ public class Library {
 	 * Displays the details of an object in the provided collection
 	 *  that has the provided ID number
 	 * 
-	 * @param collection - A collection of any type that implements the Displayable and IDNumber interfaces
+	 * @param collection - A collection of any single type that 
+	 *                     implements the Displayable and IDNumber interfaces 
 	 * 
 	 * @param idNumber - The ID Number of the object of which details should be displayed (int)
 	 *            
@@ -182,14 +191,14 @@ public class Library {
 	        }
 	    }
 
-	    // Throws exception if no object was found
+	    // Throw error if no matching object was found
 	    throw new NoSuchElementException("No " + className + "s found with ID number " + idNumber);
 	}
 
 	/**
-	 * Displays the details of every item in the provided collection
+	 * Displays the details of every Displayable item in the provided collection
 	 * 
-	 * @param collection - A collection of any type that implements the Displayable interface
+	 * @param collection - A collection of any single type that implements the Displayable interface
 	 * 
 	 * @throws IllegalArgumentException - If the provided collection is null or empty
 	 * 
@@ -222,7 +231,7 @@ public class Library {
 	 * Displays the details of members whose surname contains the search query
 	 * (case insensitive)
 	 * 
-	 * @throws NoSuchElementException - If the members collection is empty
+	 * @throws IllegalStateException - If the members collection is empty
 	 * 
 	 * @throws IllegalArgumentException - If the query is null, empty string or whitespace
 	 * 
@@ -270,6 +279,7 @@ public class Library {
 	}
 
 	/**
+	 * Mutator Method:
 	 * Removes the member with the provided ID number from the library
 	 * 
 	 * @param idNumber - The ID number of the member (int)
@@ -280,7 +290,7 @@ public class Library {
 	 * 
 	 * @throws NoSuchElementException - If no member is found
 	 */
-	public void removeMemberByID(int idNumber) throws NoSuchElementException, IllegalStateException {
+	public void removeMemberByID(int idNumber) throws IllegalArgumentException, NoSuchElementException, IllegalStateException {
 		// A Guard clause that throws an error if the members collection is
 		// empty preventing the remaining logic from running
 		if (members.isEmpty()) {
@@ -325,7 +335,6 @@ public class Library {
 	 */
 	private boolean hasBooksToReturn(int idNumber) {
 		// Guard clause to return false if the loans collection is empty
-		// preventing the remaining logic from being executed
 		if(getLoans().isEmpty()) {
 			return false;
 		}
@@ -344,8 +353,9 @@ public class Library {
 	}
 
 	/**
+	 * Mutator Method:
 	 * Adds a book to the library's books collection<br>
-	 * It also sets the member's ID number using the library's getNextIDNumber
+	 * It also sets the member's ID number using the library's #getNextIDNumber
 	 * method
 	 * 
 	 * @param book - The book to be added (Book)
@@ -377,39 +387,39 @@ public class Library {
 	}
 
 	/**
+	 * Accessor Method:
 	 * Returns the books collection
 	 * 
-	 * @return books - The library's books collection (<ArrayList<Book>)
+	 * @return books - The library's books collection (ArrayList<Book>)
 	 */
 	public ArrayList<Book> getBooks() {
 		return books;
 	}
 
 	/**
-	 * Getter Method:
+	 * Accessor Method:
 	 * Returns the book with the provided ID number
 	 * 
-	 * @param idNumber - The ID number of the book
+	 * @param idNumber - The ID number of the book (int)
 	 * 
-	 * @return book - The book with the provided ID number
+	 * @return book - The book with the provided ID number (Book)
 	 * 
-	 * @throws NoSuchElementException - If no book is found
+	 * @throws NoSuchElementException - If no book is found 
 	 * 
 	 * @throws IllegalArgumentException If the provided ID number is invalid
 	 */
-	public Book getBookByID(int idNumber) throws NoSuchElementException {
+	public Book getBookByID(int idNumber) throws NoSuchElementException, IllegalArgumentException {
 		// Guard clause that prevents invalid ID numbers from being provided
 		if (!isValidIDNumber(idNumber)) {
 			throw new IllegalArgumentException("The ID number: " + idNumber + " is not valid");
 		}
 		
-		// A Guard clause that throws an error if the books collection is empty
-		// prevents the remaining logic from executing
+		// Guard clause that throws an error if the books collection is empty
 		if (getBooks().isEmpty()) {
 			throw new NoSuchElementException("The books collection is empty");
 		}
 
-		// Iterate  the books collection
+		// Iterate the books collection
 		for (Book book : getBooks()) {
 			// Return the book with the provided ID number
 			if (book.getIDNumber() == idNumber) {
@@ -417,7 +427,7 @@ public class Library {
 			}
 		}
 
-		// An error is thrown if no book was found
+		// Throw error if no book was found
 		throw new NoSuchElementException(
 				"No book with that ID number was found!");
 	}
@@ -434,6 +444,7 @@ public class Library {
 	}
 
 	/**
+	 * Mutator Method:
 	 * Removes the book with the provided ID number
 	 * 
 	 * @param idNumber - The ID number of the book to be removed (int)
@@ -442,7 +453,7 @@ public class Library {
 	 * 
 	 * @throws IllegalArgumentException - If the book is on loan
 	 */
-	public void removeBookByID(int idNumber) {
+	public void removeBookByID(int idNumber) throws IllegalArgumentException, NoSuchElementException {
 		// Guard clause preventing the book from being removed
 		// if it is out on loan
 		if (isBookOnLoan(idNumber)) {
@@ -544,6 +555,7 @@ public class Library {
 	}
 
 	/**
+	 * Mutator Method:
 	 * Adds a loan to the lib's loans collection
 	 * 
 	 * @param member - The member borrowing the book (Member)
@@ -582,12 +594,11 @@ public class Library {
 		Iterator<Loan> loansIterator = getLoans().iterator();
 
 		// Iterate the loans collection
-		// and check that the book is not already 
-		// on loan
 		while (loansIterator.hasNext()) {
 			Loan loan = loansIterator.next();
 			Book loanedBook = loan.getBook();
-			
+			// Check that the book is not already 
+			// on loan
 			if (book == loanedBook) {
 				throw new IllegalStateException(
 						"Cannot add loan, this book is already on loan");
@@ -606,7 +617,7 @@ public class Library {
 	}
 
 	/**
-	 * Getter method:
+	 * Accessor Method:
 	 * Returns a loan with the provided member and book
 	 * 
 	 * @param member - The member who borrowed the book (Member)
@@ -620,7 +631,7 @@ public class Library {
 	 * @throws NoSuchElementException - If no loan was found 
 	 */
 	public Loan getLoan(Member member, Book book)
-			throws NoSuchElementException {
+			throws NoSuchElementException, IllegalArgumentException {
 		// Guard clause that prevents null book being provided
 		if (book == null) {
 			throw new IllegalArgumentException("Cannot get loan, book is null");
@@ -657,6 +668,7 @@ public class Library {
 	}
 
 	/**
+	 * Mutator Method:
 	 * Removes a loan with the provided member and book
 	 * 
 	 * @param member - The member who borrowed the book (Member)
@@ -670,7 +682,7 @@ public class Library {
 	 * @throws IllegalStateException - If the loans collection is empty
 	 */
 	public void removeLoan(Member member, Book book)
-			throws IllegalArgumentException, NoSuchElementException {
+			throws IllegalArgumentException, NoSuchElementException, IllegalStateException {
 		// Guard clause preventing null members being provided
 		
 		if (member == null ) {
@@ -710,9 +722,10 @@ public class Library {
 	}
 
 	/**
+	 * Accessor Method:
 	 * Returns the loans collection
 	 * 
-	 * @return loans - The whole loans collection
+	 * @return loans - The library's loans collection (ArrayList<Loan>)
 	 */
 	public ArrayList<Loan> getLoans() {
 		return loans;
@@ -734,7 +747,7 @@ public class Library {
 	 * @return loans - A collection of expired loans (List<Loan>)
 	 */
 	public List<Loan> getExpiredLoans(LocalDate expiryDate)
-			throws IllegalArgumentException, NoSuchElementException {
+			throws IllegalArgumentException, NoSuchElementException, IllegalStateException {
 
 		// Guard clause preventing null expiryDate being provided
 		if (expiryDate == null) {
@@ -772,7 +785,7 @@ public class Library {
 	 * 
 	 * @throws IllegalStateException - If the loans collection is empty
 	 */
-	public void displayExpiredLoans(LocalDate expiryDate) throws IllegalArgumentException, IllegalStateException {
+	public void displayExpiredLoans(LocalDate expiryDate) throws IllegalArgumentException, IllegalStateException, IllegalStateException {
 		// Guard clause preventing null expiryDate being provided
 		if (expiryDate == null) {
 			throw new IllegalArgumentException(
@@ -792,9 +805,8 @@ public class Library {
 	}
 
 	/**
-	 * Getter Method:
-	 * Returns whether the provided member's email address is a duplicate or
-	 * unique
+	 * A utility method that returns whether the provided member's 
+	 * email address is a duplicate or unique
 	 * 
 	 * @param member - The member whose email will be checked (Member)
 	 * 
@@ -804,16 +816,17 @@ public class Library {
 	private boolean hasExistingEmail(Member member) {
 		// Iterate the members collection 
 		for (Member existingMember : getMembers()) {
+			// Determine if the members email already exists
 			boolean isExistingEmail = existingMember.getEmail()
 					.equalsIgnoreCase(member.getEmail());
 
-			// Return true if the member's email is already allocated
+			// Return true if the member's email already exists
 			if (isExistingEmail) {
 				return true;
 			}
 		}
 
-		// Return false if the email is new
+		// Return false if the email is unique
 		return false;
 	}
 
@@ -840,7 +853,7 @@ public class Library {
 	}
 	
 	/**
-	 * Getter Method: 
+	 * Accessor Method: 
 	 * Returns the duration in days of loans
 	 * 
 	 * @return loanDurationInDays - The duration of book loans (int)
@@ -852,27 +865,29 @@ public class Library {
 	}
 
 	/**
-	 * Get the next ID number (previously issued ID number by +1)
+	 * Accessor Method:
+	 * Get the next ID number (previously issued ID number incremented by +1)
 	 * 
 	 * @return nextIdNumber The next ID number (int)
 	 */
 	public int getNextIDNumber() {
 		// Increment the previous ID number
 		nextIDNumber++;
-	
 		return nextIDNumber;
 	}
 	
 	/**
 	 * Utility method that checks whether ID numbers are valid
 	 * @param idNumber - The ID number to be validated
+	 * 
 	 * @return isValidIDNumber - Indicates whether the ID number is valid (boolean)
 	 */
 	private boolean isValidIDNumber(int idNumber) {
+		// Return true if it is valid
 		if(idNumber >= 0) {
 			return true;
 		}
-		
+		// Return false if it is not
 		return false;
 	}
 }
